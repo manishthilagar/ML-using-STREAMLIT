@@ -1,3 +1,5 @@
+#importing packages
+
 import streamlit as st
 import numpy as np
 import pandas as pd
@@ -18,17 +20,23 @@ y0=st.sidebar.slider('Enter Months of Preparation', 1, 20)
 
 
 
-
+#importing dataframe
 df=pd.read_csv("gate.csv")
 X=df[['hour','months']]
 y=df['rank']
 
+
+#creating model
 clf = LogisticRegression(random_state=0).fit(X, y)
+
+#model fitting
 clf.fit(X,y)
+
+#making prediction
 predict=clf.predict([(X0,y0)])
 predict=int(predict)
 
-
+#printing rank
 if st.sidebar.button("Get Rank"):
     st.write("###",user_input,"your rank will be:",predict)
     st.info("Your are Awesome !")
